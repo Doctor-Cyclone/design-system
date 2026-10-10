@@ -1,0 +1,27 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  cursor: pointer;
+}
+.input {
+  width: var(--space-4);
+  height: var(--space-4);
+  margin: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+.input:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: 3px;
+}
+.label:has(.input:disabled) {
+  cursor: not-allowed;
+  color: var(--color-disabled-text);
+}
+.input:disabled {
+  cursor: not-allowed;
+}

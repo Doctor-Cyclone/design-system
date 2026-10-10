@@ -3,8 +3,8 @@ const Foundation = () => (
   <article>
     <h1>Design System</h1>
     <p>
-      React 19 component library. Components and themes are arriving in the next
-      milestone.
+      Five accessible form controls and persistent light/dark/system themes are
+      available. Overlay components arrive on day 2.
     </p>
   </article>
 );
