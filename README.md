@@ -1,6 +1,6 @@
 # Design System
 
-A React 19 component library being developed on 10–12 October 2026. Day 1 includes five form controls, semantic tokens and persistent themes. Overlay components and browser regression checks are scheduled for the next two days. The package is not published to npm yet.
+A React 19 component library being developed on 10–12 October 2026. Day 1 includes five form controls, semantic tokens and persistent themes. Day 2 now adds Modal and searchable Select. Overlay components and browser regression checks are scheduled for the next two days. The package is not published to npm yet.
 
 ## Overview
 
@@ -32,11 +32,11 @@ Storybook includes the accessibility addon with violations configured as errors.
 
 ## Testing
 
-`pnpm test` currently runs 22 behavior and accessibility tests in jsdom: keyboard activation, disabled/loading behavior, controlled inputs, description associations, radio navigation, indeterminate state, theme persistence, OS changes, cross-tab synchronization and blocked storage. Browser and visual regression checks arrive on day 3.
+`pnpm test` currently runs 35 behavior and accessibility tests in jsdom: keyboard activation, disabled/loading behavior, controlled inputs, description associations, radio navigation, indeterminate state, theme persistence, OS changes, cross-tab synchronization and blocked storage. Browser and visual regression checks arrive on day 3.
 
 ## Package API
 
-Current root exports: `Button`, `Input`, `Checkbox`, `Radio`, `Switch`, `ThemeProvider`, `useTheme`, `libraryVersion` and component prop types. Modal, Select, Dropdown, Tooltip, Tabs and Toast arrive on day 2.
+Current root exports: `Button`, `Input`, `Checkbox`, `Radio`, `Switch`, `ThemeProvider`, `useTheme`, `libraryVersion`, `Modal`, `Select` and component prop types. Dropdown, Tooltip, Tabs and Toast arrive in the second day-2 milestone.
 
 Inputs use the familiar React native API: `value`/`onChange` or `defaultValue`; toggle controls use `checked`/`onChange` or `defaultChecked`. Input labels are required; `hint`, `error`, `prefix` and `suffix` are optional. Button supports four variants, three sizes, loading, disabled and labeled icon-only usage. Checkbox additionally supports `indeterminate`.
 

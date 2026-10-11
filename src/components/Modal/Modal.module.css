@@ -1,0 +1,56 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  background: var(--color-overlay);
+  overflow-y: auto;
+  font-family: var(--font-family);
+}
+.dialog {
+  width: min(100%, 32rem);
+  max-height: calc(100dvh - var(--space-8));
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+.title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height);
+}
+.description {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height);
+}
+.close {
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-primary);
+  font: inherit;
+  font-size: var(--font-size-lg);
+  min-width: var(--control-sm);
+  min-height: var(--control-sm);
+  cursor: pointer;
+}
+.close:hover {
+  background: var(--color-surface-hover);
+}
+.close:focus-visible,
+.dialog:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: 3px;
+}

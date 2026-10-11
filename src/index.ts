@@ -12,3 +12,7 @@ export { Radio } from './components/Radio';
 export type { RadioProps } from './components/Radio';
 export { Switch } from './components/Switch';
 export type { SwitchProps } from './components/Switch';
+export { Modal } from './components/Modal';
+export type { ModalProps } from './components/Modal';
+export { Select } from './components/Select';
+export type { SelectProps, SelectOption } from './components/Select';
