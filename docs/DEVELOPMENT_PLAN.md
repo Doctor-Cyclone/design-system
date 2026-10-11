@@ -19,6 +19,6 @@ Pagination и Table указаны в примере архитектуры, н�
 
 - 10 октября, push 1: основа готова; форматирование, lint, typecheck и обе сборки прошли. Компонентных тестов на этом этапе ещё нет; они входят во второй push.
 - 10 октября, push 2: готовы tokens, ThemeProvider и пять компонентов с stories. 22 теста, lint, typecheck, библиотечная и Storybook-сборки прошли. В браузере axe не обнаружил нарушений для Button Variants в обеих темах и Input Error в тёмной теме; это выборочная проверка, полная браузерная регрессия остаётся на день 3. Первый запуск GitHub Actions завершился успешно.
-- 11 октября, push 1: готовы Modal и searchable Select с тестами и stories. Все 35 тестов, lint, typecheck, библиотечная и Storybook-сборки прошли.
-- 11 октября, push 2: Dropdown, Tooltip, Tabs, Toast — в разработке.
+- 11 октября, push 1: готовы Modal и searchable Select с тестами и stories. Все 35 тестов, lint, typecheck, библиотечная и Storybook-сборки прошли. GitHub Actions для коммита 5813ad0 завершился успешно.
+- 11 октября, push 2: готовы Dropdown, Tooltip, Tabs, Toast, все 11 компонентов имеют stories. Все 55 тестов в 13 файлах, lint, typecheck и обе сборки прошли. Документация API добавлена в docs/COMPONENT_API.md. В реальном браузере проверены возврат фокуса Modal и навигация меню; axe для открытого Modal в светлой теме: 0 violations и 0 incomplete. Для Toast Multiple: 0 violations, декоративный символ успеха отмечен как incomplete и визуально проверен. Полная автоматическая browser/visual regression проверка остаётся на 12 октября. Storybook сканирует body для покрытия portal-контента; Modal/Toast examples в Docs изолированы в iframe.
 - 12 октября, push 1–2: запланированы, продолжение вручную.

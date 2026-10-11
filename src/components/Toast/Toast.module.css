@@ -1,0 +1,57 @@
+.viewport {
+  position: fixed;
+  inset-inline-end: var(--space-4);
+  bottom: var(--space-4);
+  z-index: var(--z-toast);
+  width: min(24rem, calc(100vw - var(--space-8)));
+  display: grid;
+  gap: var(--space-2);
+  font-family: var(--font-family);
+  pointer-events: none;
+}
+.stack {
+  display: grid;
+  gap: var(--space-2);
+}
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  pointer-events: auto;
+}
+.message {
+  flex: 1;
+  margin: 0;
+  line-height: var(--line-height);
+  overflow-wrap: anywhere;
+}
+.icon {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-medium);
+}
+.card[data-kind='error'] .icon {
+  color: var(--color-danger);
+}
+.close {
+  border: 0;
+  background: transparent;
+  color: var(--color-text-primary);
+  font: inherit;
+  min-width: var(--space-6);
+  min-height: var(--space-6);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.close:hover {
+  background: var(--color-surface-hover);
+}
+.close:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: 2px;
+}

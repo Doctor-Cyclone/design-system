@@ -7,6 +7,7 @@ import {
 } from '../../utils/modalLayer';
 import type { ModalProps } from './Modal.types';
 import styles from './Modal.module.css';
+import { CloseIcon } from '../../utils/CloseIcon';
 
 export function Modal({
   open,
@@ -129,7 +130,7 @@ export function Modal({
               tabIndex={-1}
               className={[styles.dialog, className].filter(Boolean).join(' ')}
             >
-              <header className={styles.header}>
+              <div className={styles.header}>
                 <h2 id={`${id}-title`} className={styles.title}>
                   {title}
                 </h2>
@@ -139,9 +140,9 @@ export function Modal({
                   aria-label={closeLabel}
                   className={styles.close}
                 >
-                  ×
+                  <CloseIcon />
                 </button>
-              </header>
+              </div>
               {description && (
                 <p id={`${id}-description`} className={styles.description}>
                   {description}

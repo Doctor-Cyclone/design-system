@@ -16,3 +16,15 @@ export { Modal } from './components/Modal';
 export type { ModalProps } from './components/Modal';
 export { Select } from './components/Select';
 export type { SelectProps, SelectOption } from './components/Select';
+export { Dropdown } from './components/Dropdown';
+export type { DropdownProps, DropdownItem } from './components/Dropdown';
+export { Tooltip } from './components/Tooltip';
+export type { TooltipProps, TooltipTriggerProps } from './components/Tooltip';
+export { Tabs } from './components/Tabs';
+export type { TabsProps, TabItem } from './components/Tabs';
+export { ToastProvider, toast } from './components/Toast';
+export type {
+  ToastProviderProps,
+  ToastOptions,
+  ToastKind,
+} from './components/Toast';

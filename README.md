@@ -1,6 +1,6 @@
 # Design System
 
-A React 19 component library being developed on 10–12 October 2026. Day 1 includes five form controls, semantic tokens and persistent themes. Day 2 now adds Modal and searchable Select. Overlay components and browser regression checks are scheduled for the next two days. The package is not published to npm yet.
+A React 19 component library being developed on 10–12 October 2026. Days 1–2 include eleven components, semantic tokens and persistent themes. Automated browser regression checks and release-workflow completion are scheduled for day 3. The package is not published to npm yet.
 
 ## Overview
 
@@ -16,7 +16,7 @@ React 19, strict TypeScript, Vite library mode, CSS Modules, Storybook, Vitest, 
 
 ## Architecture
 
-`src/components/<Component>/` will contain implementation, types, CSS Module, stories, behavior tests and a local barrel. Consumers import only from the package root; package exports prevent internal deep imports. React is a peer dependency and stays outside the ESM bundle.
+`src/components/<Component>/` contains implementation, types, CSS Module, stories, behavior tests and a local barrel. Consumers import only from the package root; package exports prevent internal deep imports. React is a peer dependency and stays outside the ESM bundle.
 
 ## Design Tokens
 
@@ -28,15 +28,15 @@ The Storybook toolbar switches palettes, and the Design Tokens page displays col
 
 Button and form inputs use native HTML controls. Labels and descriptions are associated through stable IDs; error inputs expose `aria-invalid`. Icon-only buttons require an `aria-label` in the TypeScript API. Related radios should use the same `name` inside a fieldset with a legend; native arrow-key navigation is retained. All controls have visible keyboard focus states.
 
-Storybook includes the accessibility addon with violations configured as errors. The component composition has an automated axe check in jsdom; color contrast is excluded there because jsdom has no layout engine. Full browser accessibility checks, contrast verification and overlay focus testing remain scheduled for days 2–3. Passing a build alone does not establish WCAG compliance.
+Storybook includes the accessibility addon with violations configured as errors. The component composition has an automated axe check in jsdom; color contrast is excluded there because jsdom has no layout engine. Modal focus containment, nested Escape handling and background isolation have behavior tests. Storybook scans include portal content. Full automated browser accessibility and contrast verification remain scheduled for day 3. Passing a build alone does not establish WCAG compliance.
 
 ## Testing
 
-`pnpm test` currently runs 35 behavior and accessibility tests in jsdom: keyboard activation, disabled/loading behavior, controlled inputs, description associations, radio navigation, indeterminate state, theme persistence, OS changes, cross-tab synchronization and blocked storage. Browser and visual regression checks arrive on day 3.
+`pnpm test` currently runs 55 behavior and accessibility tests in jsdom: keyboard activation, disabled/loading behavior, controlled inputs, description associations, radio navigation, indeterminate state, theme persistence, OS changes, cross-tab synchronization and blocked storage, modal focus restoration, Select search/selection, menu navigation, tab activation, tooltip delay/dismissal and paused toast lifetimes. Browser and visual regression checks arrive on day 3.
 
 ## Package API
 
-Current root exports: `Button`, `Input`, `Checkbox`, `Radio`, `Switch`, `ThemeProvider`, `useTheme`, `libraryVersion`, `Modal`, `Select` and component prop types. Dropdown, Tooltip, Tabs and Toast arrive in the second day-2 milestone.
+Current root exports: `Button`, `Input`, `Checkbox`, `Radio`, `Switch`, `ThemeProvider`, `useTheme`, `libraryVersion`, `Modal`, `Select`, `Dropdown`, `Tooltip`, `Tabs`, `ToastProvider`, `toast` and component prop types. See [Component API](docs/COMPONENT_API.md) for overlay and notification examples.
 
 Inputs use the familiar React native API: `value`/`onChange` or `defaultValue`; toggle controls use `checked`/`onChange` or `defaultChecked`. Input labels are required; `hint`, `error`, `prefix` and `suffix` are optional. Button supports four variants, three sizes, loading, disabled and labeled icon-only usage. Checkbox additionally supports `indeterminate`.
 

@@ -20,6 +20,12 @@ ThemeProvider owns the document's `data-theme` attribute while mounted and resto
 
 Day 1 tests validate observable behavior and run axe against a composed form. jsdom cannot verify rendered contrast or real-browser layout. Storybook's addon supports interactive accessibility inspection; its build does not itself run the planned browser test suite. Day 3 adds browser accessibility and visual regression checks. Visual baselines must be inspected before accepting them.
 
-## Future overlays
+## Overlay and interaction ownership
 
-Day 2 should add tested focus management, background inertness and scroll locking for Modal, plus an explicit combobox/listbox contract for searchable Select. Shared overlay utilities may be introduced after the first implementations identify actual common behavior. Avoid adopting a large UI library.
+Day 2 implements custom Modal focus containment and document isolation, with a small shared modal-layer manager to restore background state in stack order. Escape bubbles so an inner Select or Dropdown may consume it before the dialog closes. Select keeps DOM focus on its editable combobox; Dropdown instead focuses native menu action buttons. These are distinct interactions and do not share an artificial navigation abstraction.
+
+Tooltip retains the trigger's event handlers and adds only the description relationship. Tabs use automatic activation for local content. Toast notifications use an immutable external store and provider-owned timers; focus/hover pause auto-dismiss without resetting the remaining time.
+
+Storybook accessibility scans include the iframe body so dialogs mounted through a portal are covered. Day 3 remains responsible for automated browser interactions, contrast checks, inspected visual baselines and verification in a consuming application. Full WCAG compliance is not inferred from unit tests.
+
+See [component API](COMPONENT_API.md) for examples and scope boundaries. Keyboard patterns follow the [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/).

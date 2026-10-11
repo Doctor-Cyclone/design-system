@@ -3,8 +3,9 @@ const Foundation = () => (
   <article>
     <h1>Design System</h1>
     <p>
-      Five accessible form controls and persistent light/dark/system themes are
-      available. Overlay components arrive on day 2.
+      Eleven components, persistent light/dark/system themes and documented
+      keyboard interactions are available. Browser regression tests arrive on
+      day 3.
     </p>
   </article>
 );

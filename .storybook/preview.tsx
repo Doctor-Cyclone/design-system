@@ -29,7 +29,11 @@ const preview: Preview = {
       </div>
     ),
   ],
-  parameters: { a11y: { test: 'error' }, controls: { expanded: true } },
+  // Scan the document, including portal-mounted dialogs outside the story root.
+  parameters: {
+    a11y: { test: 'error', context: 'body' },
+    controls: { expanded: true },
+  },
   tags: ['autodocs'],
 };
 export default preview;

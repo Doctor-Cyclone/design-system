@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import type { SelectOption, SelectProps } from './Select.types';
 import styles from './Select.module.css';
 
@@ -37,6 +37,12 @@ export function Select({
     available.find((option) => option.value === activeValue) ?? available[0];
   const activeIndex = filtered.findIndex((option) => option === active);
   const optionId = (index: number) => `${listId}-${index}`;
+  useEffect(() => {
+    if (expanded && activeIndex >= 0)
+      document
+        .getElementById(`${listId}-${activeIndex}`)
+        ?.scrollIntoView?.({ block: 'nearest' });
+  }, [expanded, activeIndex, listId, query]);
   const selectedLabel =
     options.find((option) => option.value === selected)?.label ?? '';
   const close = () => {

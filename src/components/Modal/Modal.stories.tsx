@@ -28,6 +28,7 @@ function Example(args: ModalProps) {
 }
 const meta = {
   title: 'Components/Modal',
+  parameters: { docs: { story: { inline: false, height: '400px' } } },
   component: Modal,
   args: {
     open: false,
