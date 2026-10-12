@@ -1,0 +1,57 @@
+name: Release package (manual)
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish to npm after all checks (requires npm trusted publisher)
+        type: boolean
+        default: false
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: npm-release
+  cancel-in-progress: false
+jobs:
+  quality:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/ci.yml
+  pack:
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Require applied Changesets
+        run: |
+          node --input-type=module -e "import fs from 'node:fs'; const pending = fs.readdirSync('.changeset').filter(f => f.endsWith('.md') && f !== 'README.md'); if (pending.length) throw new Error('Apply pending Changesets before release: ' + pending.join(', '));"
+      - run: pnpm build
+      - run: pnpm pack --pack-destination artifacts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packed-ui
+          path: artifacts/*.tgz
+          retention-days: 14
+  publish:
+    if: inputs.publish
+    needs: [quality, pack]
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with:
+          name: packed-ui
+          path: artifacts
+      - name: Publish the verified tarball through npm OIDC
+        run: npm publish artifacts/*.tgz --provenance --access public

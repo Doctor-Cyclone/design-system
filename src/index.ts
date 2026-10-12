@@ -1,5 +1,6 @@
 import './styles/index.css';
-export const libraryVersion = '0.1.0';
+declare const __LIBRARY_VERSION__: string;
+export const libraryVersion = __LIBRARY_VERSION__;
 export { ThemeProvider, useTheme } from './hooks/ThemeProvider';
 export type { Theme } from './hooks/ThemeProvider';
 export { Button } from './components/Button';

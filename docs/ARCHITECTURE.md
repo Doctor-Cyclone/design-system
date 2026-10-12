@@ -18,7 +18,7 @@ ThemeProvider owns the document's `data-theme` attribute while mounted and resto
 
 ## Verification boundaries
 
-Day 1 tests validate observable behavior and run axe against a composed form. jsdom cannot verify rendered contrast or real-browser layout. Storybook's addon supports interactive accessibility inspection; its build does not itself run the planned browser test suite. Day 3 adds browser accessibility and visual regression checks. Visual baselines must be inspected before accepting them.
+Component tests validate observable behavior and run axe against a composed form. jsdom cannot verify rendered contrast or real-browser layout. Storybook's addon supports interactive accessibility inspection; its build does not itself run browser tests. Playwright now verifies browser interactions and representative accessibility states in both themes; inspected screenshots cover Button, Input, Modal, Select and keyboard focus. Windows CI uses OS-specific baselines, and never updates them automatically. See [testing boundaries](TESTING.md).
 
 ## Overlay and interaction ownership
 
@@ -26,6 +26,10 @@ Day 2 implements custom Modal focus containment and document isolation, with a s
 
 Tooltip retains the trigger's event handlers and adds only the description relationship. Tabs use automatic activation for local content. Toast notifications use an immutable external store and provider-owned timers; focus/hover pause auto-dismiss without resetting the remaining time.
 
-Storybook accessibility scans include the iframe body so dialogs mounted through a portal are covered. Day 3 remains responsible for automated browser interactions, contrast checks, inspected visual baselines and verification in a consuming application. Full WCAG compliance is not inferred from unit tests.
+Storybook accessibility scans include the iframe body so dialogs mounted through a portal are covered. The browser suite includes color contrast and verifies incomplete axe results explicitly rather than dropping them. A separate installed-tarball consumer verifies package boundaries, declarations, CSS and ESM bundling. Full WCAG compliance is not inferred from automated tests.
+
+## Release boundary
+
+Changesets owns package versions and the changelog. Build-time version injection reads package metadata, avoiding a second manually synchronized version in the public API. The manual release workflow reuses CI and packs a distributable archive; npm publication is disabled by default and requires separately configured trusted publishing and an explicit manual request.
 
 See [component API](COMPONENT_API.md) for examples and scope boundaries. Keyboard patterns follow the [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/).

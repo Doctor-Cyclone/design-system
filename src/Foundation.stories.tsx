@@ -4,8 +4,8 @@ const Foundation = () => (
     <h1>Design System</h1>
     <p>
       Eleven components, persistent light/dark/system themes and documented
-      keyboard interactions are available. Browser regression tests arrive on
-      day 3.
+      keyboard interactions are available. Chromium checks cover accessibility,
+      keyboard behavior and visual regression in both themes.
     </p>
   </article>
 );

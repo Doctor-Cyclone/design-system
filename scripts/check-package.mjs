@@ -104,6 +104,7 @@ assert.match(css, /--color-accent/);
 assert.match(css, /data-theme/);
 // SSR-load the package entry: every public runtime export must be present.
 const exports = await import(pathToFileURL(entry).href);
+assert.equal(exports.libraryVersion, manifest.version);
 for (const name of [
   'Button',
   'Input',
