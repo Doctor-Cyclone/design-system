@@ -8,6 +8,7 @@ export default tseslint.config(
   {
     ignores: [
       'dist/**',
+      'gallery-dist/**',
       'storybook-static/**',
       'coverage/**',
       'node_modules/**',

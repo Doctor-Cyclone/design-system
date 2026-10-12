@@ -35,7 +35,7 @@
     "url": "https://github.com/Doctor-Cyclone/design-system.git"
   },
   "scripts": {
-    "dev": "storybook dev -p 6006",
+    "dev": "vite --config vite.gallery.config.ts --open",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build",
     "build": "vite build && tsc -p tsconfig.build.json",
@@ -48,11 +48,14 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish",
-    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm build:storybook",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm build:gallery && pnpm build:storybook",
     "test:browser": "playwright test",
+    "test:gallery": "playwright test --config playwright.gallery.config.ts",
     "test:visual": "playwright test visual.spec.ts",
     "test:visual:update": "playwright test visual.spec.ts --update-snapshots=all",
-    "package:check": "node scripts/check-package.mjs"
+    "package:check": "node scripts/check-package.mjs",
+    "build:gallery": "vite build --config vite.gallery.config.ts",
+    "preview:gallery": "vite preview --config vite.gallery.config.ts --open"
   },
   "peerDependencies": {
     "react": "^19.0.0",

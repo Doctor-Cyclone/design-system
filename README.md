@@ -53,7 +53,13 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Storybook opens at `http://localhost:6006`. To install the current library into your own React 19 application, create a local tarball:
+The component gallery opens at `http://localhost:5173`. It shows all eleven components, their variants and states, interactive overlays and design tokens, with persistent theme selection and responsive navigation. All examples use the public library exports. Demo actions stay local to the page.
+
+Run `pnpm storybook` separately for full documentation at `http://localhost:6006`; the gallery footer links to that address. Use `pnpm build:gallery` to generate the standalone website in `gallery-dist/`, and `pnpm preview:gallery` to inspect that build. The gallery is separate from the npm library bundle.
+
+After building the gallery, `pnpm test:gallery` checks both palettes with axe, theme persistence, composed controls, nested dialogs, notifications and a 320px layout. CI runs these checks alongside the existing Storybook browser suite.
+
+To install the current library into your own React 19 application, create a local tarball:
 
 ```sh
 # In the library repository:
@@ -129,6 +135,6 @@ The manual Release package workflow reuses those checks and produces a tarball a
 
 ## Development
 
-Node 24 and pnpm 11.25.0. Run `pnpm dev` for Storybook, `pnpm build` for `dist/index.js`, `dist/index.d.ts` and styles, and `pnpm check` for formatting, lint, types, component tests and both builds. For full verification also run `pnpm exec playwright install chromium`, `pnpm test:browser` and `pnpm package:check`. Browser tests manage their own preview server; stop a development Storybook on port 6006 before running them.
+Node 24 and pnpm 11.25.0. Run `pnpm dev` for the component gallery, `pnpm storybook` for Storybook, `pnpm build` for `dist/index.js`, `dist/index.d.ts` and styles, and `pnpm check` for formatting, lint, types, component tests, library, gallery and Storybook builds. For full verification also run `pnpm exec playwright install chromium`, `pnpm test:browser` and `pnpm package:check`. Browser tests manage their own preview server; stop a development Storybook on port 6006 before running them.
 
 See [architecture decisions](docs/ARCHITECTURE.md), [the three-day plan](docs/DEVELOPMENT_PLAN.md), [specification coverage](docs/SPEC_COVERAGE.md) and [the source specification](docs/SPEC.md).

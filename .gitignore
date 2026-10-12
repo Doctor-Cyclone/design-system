@@ -13,3 +13,4 @@ playwright-report/
 .package-check/
 artifacts/
 *.tgz
+gallery-dist/
