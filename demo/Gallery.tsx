@@ -148,10 +148,12 @@ export function Gallery() {
           <span className="gallery-version">v{libraryVersion}</span>
         </a>
         <div className="gallery-row">
-          <label className="gallery-theme">
+          <label className="gallery-theme" htmlFor="gallery-theme">
             Тема{' '}
             <span className="gallery-theme-control">
               <select
+                id="gallery-theme"
+                name="theme"
                 value={theme}
                 onChange={(event) =>
                   setTheme(event.target.value as typeof theme)
