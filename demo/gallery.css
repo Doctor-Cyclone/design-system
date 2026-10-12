@@ -69,13 +69,25 @@ select:focus-visible {
   font-size: var(--font-size-sm);
 }
 .gallery-theme select {
+  appearance: none;
   min-height: 40px;
-  padding: var(--space-2);
+  padding: var(--space-2) var(--space-8) var(--space-2) var(--space-3);
   color: var(--color-text-primary);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   font: inherit;
+}
+.gallery-theme-control {
+  position: relative;
+  display: inline-flex;
+}
+.gallery-theme-control svg {
+  position: absolute;
+  inset-inline-end: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 .gallery-link {
   padding: var(--space-2) var(--space-3);

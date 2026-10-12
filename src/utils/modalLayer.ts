@@ -1,6 +1,7 @@
 const stack: HTMLElement[] = [];
 const previous = new Map<HTMLElement, boolean>();
 let overflow = '';
+let scrollbarGutter = '';
 let observer: MutationObserver | undefined;
 
 function update() {
@@ -17,6 +18,16 @@ function update() {
 export function isolateModal(layer: HTMLElement) {
   if (stack.length === 0) {
     overflow = document.body.style.overflow;
+    const root = document.documentElement;
+    scrollbarGutter = root.style.scrollbarGutter;
+    // Keep the existing scrollbar space while scrolling is locked; nested
+    // dialogs share this reservation until the final dialog closes.
+    if (
+      window.innerWidth > root.clientWidth &&
+      getComputedStyle(root).scrollbarGutter === 'auto'
+    ) {
+      root.style.scrollbarGutter = 'stable';
+    }
     document.body.style.overflow = 'hidden';
     observer = new MutationObserver(update);
     observer.observe(document.body, { childList: true });
@@ -35,6 +46,7 @@ export function isolateModal(layer: HTMLElement) {
       });
       previous.clear();
       document.body.style.overflow = overflow;
+      document.documentElement.style.scrollbarGutter = scrollbarGutter;
     }
   };
 }

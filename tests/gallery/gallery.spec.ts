@@ -1,6 +1,67 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+test('field controls align with peers that have hints or errors', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  for (const labels of [
+    ['Название проекта', 'Email', 'Email с ошибкой'],
+    ['Адрес сайта', 'Недоступное поле', 'Контролируемый ввод'],
+    ['Framework', 'Выбранное значение'],
+    ['Ошибка выбора', 'Недоступный список'],
+  ]) {
+    const boxes = await Promise.all(
+      labels.map((label) =>
+        page
+          .getByRole('textbox', { name: label, exact: true })
+          .or(page.getByRole('combobox', { name: label, exact: true }))
+          .boundingBox(),
+      ),
+    );
+    expect(boxes.every((box) => box !== null)).toBe(true);
+    const tops = boxes.map((box) => box!.y);
+    expect(Math.max(...tops) - Math.min(...tops)).toBeLessThanOrEqual(1);
+  }
+});
+
+test('scroll lock preserves background geometry through nested dialogs', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const opener = page.getByRole('button', {
+    name: 'Вложенный диалог',
+    exact: true,
+  });
+  await opener.scrollIntoViewIfNeeded();
+  const geometry = () =>
+    page.locator('.gallery-layout').evaluate((element) => {
+      const box = element.getBoundingClientRect();
+      return { x: box.x, width: box.width };
+    });
+  const before = await geometry();
+  const gutter = await page
+    .locator('html')
+    .evaluate((element) => (element as HTMLElement).style.scrollbarGutter);
+  await opener.click();
+  await expect(
+    page.getByRole('dialog', { name: 'Создать проект', exact: true }),
+  ).toBeVisible();
+  expect(await geometry()).toEqual(before);
+  await page.getByRole('button', { name: 'Открыть подтверждение' }).click();
+  expect(await geometry()).toEqual(before);
+  await page.keyboard.press('Escape');
+  expect(await geometry()).toEqual(before);
+  await page.keyboard.press('Escape');
+  expect(await geometry()).toEqual(before);
+  expect(
+    await page
+      .locator('html')
+      .evaluate((element) => (element as HTMLElement).style.scrollbarGutter),
+  ).toBe(gutter);
+});
+
 for (const theme of ['light', 'dark']) {
   test(`gallery is accessible in ${theme} theme`, async ({ page }) => {
     await page.goto('/');

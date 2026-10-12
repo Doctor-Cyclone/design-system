@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { ChevronIcon } from '../src/utils/ChevronIcon';
 import {
   Button,
   Checkbox,
@@ -149,14 +150,19 @@ export function Gallery() {
         <div className="gallery-row">
           <label className="gallery-theme">
             Тема{' '}
-            <select
-              value={theme}
-              onChange={(event) => setTheme(event.target.value as typeof theme)}
-            >
-              <option value="system">Авто</option>
-              <option value="light">Светлая</option>
-              <option value="dark">Тёмная</option>
-            </select>
+            <span className="gallery-theme-control">
+              <select
+                value={theme}
+                onChange={(event) =>
+                  setTheme(event.target.value as typeof theme)
+                }
+              >
+                <option value="system">Авто</option>
+                <option value="light">Светлая</option>
+                <option value="dark">Тёмная</option>
+              </select>
+              <ChevronIcon />
+            </span>
           </label>
           <a
             className="gallery-link"
