@@ -39,7 +39,28 @@ function ToastCard({
       }}
     >
       <span aria-hidden="true" className={styles.icon}>
-        {item.kind === 'success' ? '✓' : item.kind === 'error' ? '!' : 'i'}
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d={
+              item.kind === 'success'
+                ? 'm3 8 3 3 7-7'
+                : item.kind === 'error'
+                  ? 'M8 3v6m0 3v1'
+                  : 'M8 7v6m0-10v1'
+            }
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </span>
       <p className={styles.message}>{item.message}</p>
       <button

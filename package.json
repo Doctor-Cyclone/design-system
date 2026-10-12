@@ -47,15 +47,21 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish",
-    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm build:storybook"
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm build:storybook",
+    "test:browser": "playwright test",
+    "test:visual": "playwright test visual.spec.ts",
+    "test:visual:update": "playwright test visual.spec.ts --update-snapshots=all",
+    "package:check": "node scripts/check-package.mjs"
   },
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
     "@changesets/cli": "^2.29.0",
     "@eslint/js": "^9.39.0",
+    "@playwright/test": "1.64.0",
     "@storybook/addon-a11y": "10.6.1",
     "@storybook/addon-docs": "10.6.1",
     "@storybook/react-vite": "10.6.1",

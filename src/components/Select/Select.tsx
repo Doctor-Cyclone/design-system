@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import type { SelectOption, SelectProps } from './Select.types';
 import styles from './Select.module.css';
+import { ChevronIcon } from '../../utils/ChevronIcon';
 
 /** Editable single-select combobox; DOM focus stays on the input while options use active descendant. */
 export function Select({
@@ -142,7 +143,7 @@ export function Select({
           }}
         />
         <span aria-hidden="true" className={styles.arrow}>
-          ⌄
+          <ChevronIcon />
         </span>
         {expanded && (
           <ul

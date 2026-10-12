@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '../Button';
 import type { DropdownProps } from './Dropdown.types';
 import styles from './Dropdown.module.css';
+import { ChevronIcon } from '../../utils/ChevronIcon';
 
 export function Dropdown({ label, items, disabled, className }: DropdownProps) {
   const id = useId();
@@ -58,7 +59,7 @@ export function Dropdown({ label, items, disabled, className }: DropdownProps) {
           }
         }}
       >
-        {label} <span aria-hidden="true">⌄</span>
+        {label} <ChevronIcon />
       </Button>
       {expanded && (
         <div
